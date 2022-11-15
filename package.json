@@ -1,6 +1,6 @@
 {
-  "name": "pr-labels-action",
-  "version": "1.0.6",
+  "name": "pr-labels-action-json",
+  "version": "1.0.0",
   "description": "A github action that extracts labels from the PR that this build belongs to and make them available to other actions.",
   "main": "build/index.js",
   "scripts": {
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joerick/pr-labels-action.git"
+    "url": "git+https://github.com/Asafb26/pr-labels-action-json.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/joerick/pr-labels-action/issues"
+    "url": "https://github.com/Asafb26/pr-labels-action-json/issues"
   },
-  "homepage": "https://github.com/joerick/pr-labels-action#readme",
+  "homepage": "https://github.com/Asafb26/pr-labels-action-json#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",

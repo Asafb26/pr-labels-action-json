@@ -1,4 +1,6 @@
 # PR Labels Github Action
+###
+THIS IS A FORK OF https://github.com/joerick/pr-labels-action
 
 ![Screenshot](screenshot.png)
 
@@ -12,7 +14,7 @@ The labels on this PR. A string containing tag identifiers surrounded with space
 
 ### `labels-object`
 
-The labels on this PR. A dictionary containing `true` where a label exists.
+The labels on this PR. An array containing the value of the label where a label exists.
 
 ## Example usage
 

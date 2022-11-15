@@ -14,7 +14,7 @@ interface Label {
 
 function main() {
     const labels: Label[]|undefined = github.context.payload?.pull_request?.labels
-    const labelsObject: {[k: string]: true} = {}
+    const labelsObject: string[] = []
 
     if (!labels) {
         core.info("Not a pull request")
@@ -36,10 +36,10 @@ function main() {
 
         core.exportVariable(environmentVariable, '1');
         core.info(`\nFound label ${ansiColor.startColor(label.color)} ${label.name} ${ansiColor.endColor()}\n  Setting env var for remaining steps: ${environmentVariable}=1`)
-        labelsObject[identifier] = true
+        labelsObject.push(identifier)
     }
 
-    const labelsString = ' ' + Object.keys(labelsObject).join(' ') + ' '
+    const labelsString = labelsObject.join()
 
     core.info(`\nAction output:\nlabels: ${JSON.stringify(labelsString)}\nlabels-object: ${JSON.stringify(labelsObject)}`)
     core.setOutput('labels', labelsString);
