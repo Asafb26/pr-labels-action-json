@@ -19,14 +19,14 @@ function main() {
     if (!labels) {
         core.info("Not a pull request")
         core.setOutput('labels', '')
-        core.setOutput('labels-object', null)
+        core.setOutput('labels-object', labelsObject)
         return;
     }
 
     if (labels.length == 0) {
         core.info("No labels found")
         core.setOutput('labels', '')
-        core.setOutput('labels-object', {})
+        core.setOutput('labels-object', labelsObject)
         return;
     }
 
