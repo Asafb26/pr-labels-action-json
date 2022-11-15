@@ -14,7 +14,7 @@ interface Label {
 
 function main() {
     const labels: Label[]|undefined = github.context.payload?.pull_request?.labels
-    const labelsObject: string[] = []
+    const labelsObject: {label: string}[] = []
     const excludeLabels: string[] = core.getInput('exclude-labels')?.split(',')?.map(label => label.trim()) || [];
 
     if (!labels) {
@@ -29,7 +29,7 @@ function main() {
     if (filteredLabels.length == 0) {
         core.info("No labels found")
         core.setOutput('labels', '')
-        core.setOutput('labels-object', filteredLabels)
+        core.setOutput('labels-object', labelsObject)
         return;
     }
 
@@ -39,7 +39,7 @@ function main() {
 
         core.exportVariable(environmentVariable, '1');
         core.info(`\nFound label ${ansiColor.startColor(label.color)} ${label.name} ${ansiColor.endColor()}\n  Setting env var for remaining steps: ${environmentVariable}=1`)
-        labelsObject.push(identifier)
+        labelsObject.push({label: identifier})
     }
 
     const labelsString = labelsObject.join()

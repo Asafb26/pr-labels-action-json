@@ -97,7 +97,7 @@ function main() {
     if (filteredLabels.length == 0) {
         core.info("No labels found");
         core.setOutput('labels', '');
-        core.setOutput('labels-object', filteredLabels);
+        core.setOutput('labels-object', labelsObject);
         return;
     }
     for (const label of filteredLabels) {
@@ -105,7 +105,7 @@ function main() {
         const environmentVariable = nameToEnvironmentVariableName(label.name);
         core.exportVariable(environmentVariable, '1');
         core.info(`\nFound label ${ansiColor_1.default.startColor(label.color)} ${label.name} ${ansiColor_1.default.endColor()}\n  Setting env var for remaining steps: ${environmentVariable}=1`);
-        labelsObject.push(identifier);
+        labelsObject.push({ label: identifier });
     }
     const labelsString = labelsObject.join();
     core.info(`\nAction output:\nlabels: ${JSON.stringify(labelsString)}\nlabels-object: ${JSON.stringify(labelsObject)}`);
