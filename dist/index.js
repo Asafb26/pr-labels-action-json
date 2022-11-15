@@ -103,7 +103,7 @@ function main() {
         const environmentVariable = nameToEnvironmentVariableName(label.name);
         core.exportVariable(environmentVariable, '1');
         core.info(`\nFound label ${ansiColor_1.default.startColor(label.color)} ${label.name} ${ansiColor_1.default.endColor()}\n  Setting env var for remaining steps: ${environmentVariable}=1`);
-        labelsObject.push({ label: identifier });
+        labelsObject.push(identifier);
     }
     const labelsString = labelsObject.join();
     core.info(`\nAction output:\nlabels: ${JSON.stringify(labelsString)}\nlabels-object: ${JSON.stringify(labelsObject)}`);
