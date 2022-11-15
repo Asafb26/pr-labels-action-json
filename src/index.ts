@@ -15,6 +15,7 @@ interface Label {
 function main() {
     const labels: Label[]|undefined = github.context.payload?.pull_request?.labels
     const labelsObject: string[] = []
+    const excludeLabels: string[] = core.getInput('exclude-labels')?.split(',')?.map(label => label.trim()) || [];
 
     if (!labels) {
         core.info("Not a pull request")
@@ -23,14 +24,16 @@ function main() {
         return;
     }
 
-    if (labels.length == 0) {
+    const filteredLabels = labels.filter(label => !excludeLabels.includes(label.name))
+
+    if (filteredLabels.length == 0) {
         core.info("No labels found")
         core.setOutput('labels', '')
-        core.setOutput('labels-object', labelsObject)
+        core.setOutput('labels-object', filteredLabels)
         return;
     }
 
-    for (const label of labels) {
+    for (const label of filteredLabels) {
         const identifier = nameToIdentifier(label.name);
         const environmentVariable = nameToEnvironmentVariableName(label.name);
 

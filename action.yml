@@ -1,17 +1,20 @@
-name: 'PR labels'
+name: 'PR labels JSON'
 description: |
+  A fork from joerick/pr-labels-action
   Extract labels from the PR that this build belongs to and make them 
-  available to other actions.
-author: joerick
+  available to other actions as a json.
+author: asafb26
+inputs:
+  exclude-labels:
+    description: 'Labels to exclude from this action'
+    required: false
 outputs:
   labels:
     description: |
-      The labels on this PR. A string containing tag identifiers surrounded
-      with spaces for easy use with `contains`.
+      The labels on this PR. A comma seperated string containing tag identifiers.
   labels-object:
     description: |
-      The labels on this PR. A dictionary containing `true` where a label
-      exists
+      The labels on this PR. An array containing the value of the label where a label exists.
 runs:
   using: 'node16'
   main: 'dist/index.js'

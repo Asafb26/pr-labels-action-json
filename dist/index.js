@@ -83,22 +83,24 @@ const github = __importStar(__webpack_require__(5438));
 const ansiColor_1 = __importDefault(__webpack_require__(6214));
 const deburr_1 = __importDefault(__webpack_require__(833));
 function main() {
-    var _a, _b;
+    var _a, _b, _c, _d;
     const labels = (_b = (_a = github.context.payload) === null || _a === void 0 ? void 0 : _a.pull_request) === null || _b === void 0 ? void 0 : _b.labels;
     const labelsObject = [];
+    const excludeLabels = ((_d = (_c = core.getInput('exclude-labels')) === null || _c === void 0 ? void 0 : _c.split(',')) === null || _d === void 0 ? void 0 : _d.map(label => label.trim())) || [];
     if (!labels) {
         core.info("Not a pull request");
         core.setOutput('labels', '');
         core.setOutput('labels-object', labelsObject);
         return;
     }
-    if (labels.length == 0) {
+    const filteredLabels = labels.filter(label => !excludeLabels.includes(label.name));
+    if (filteredLabels.length == 0) {
         core.info("No labels found");
         core.setOutput('labels', '');
-        core.setOutput('labels-object', labelsObject);
+        core.setOutput('labels-object', filteredLabels);
         return;
     }
-    for (const label of labels) {
+    for (const label of filteredLabels) {
         const identifier = nameToIdentifier(label.name);
         const environmentVariable = nameToEnvironmentVariableName(label.name);
         core.exportVariable(environmentVariable, '1');

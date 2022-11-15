@@ -10,7 +10,7 @@ A Github action that extracts labels from the PR that this build belongs to, and
 
 ### `labels`
 
-The labels on this PR. A string containing tag identifiers surrounded with spaces for easy use with `contains`.
+The labels on this PR. A comma seperated string containing tag identifiers.
 
 ### `labels-object`
 
